@@ -37,14 +37,11 @@ class UserManager(models.Manager):
 		if form['passwordcf'] != form['password']:
 			errors.append("Password confirmation does not match")
 
-		if len(form['hired_at']) == 0:
-			errors.append("Please enter your hired date")
-
 		return errors
 	
 	def register(self, form):
 		hashed_pass = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt())
-		return self.create(first_name=form['first_name'], last_name=form['last_name'], email=form['email'], hired_at=form['hired_at'], password=hashed_pass)
+		return self.create(first_name=form['first_name'], last_name=form['last_name'], email=form['email'], password=hashed_pass)
 
 	def login_check(self, form):
 		check_user = self.filter(email=form['email'])
