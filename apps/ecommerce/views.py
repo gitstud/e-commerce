@@ -14,7 +14,7 @@ def orders(request):
     return render(request, 'ecommerce/orders.html')
 
 def products(request):
-    products = Products.objects.all()
+    products = Products.objects.all().filter(ongoing=True)
     context = {
             'products': products
             }
@@ -28,4 +28,14 @@ def test(request):
 
 def add_product(request):
     product = Products.objects.add_product(form_data=request.POST)
+    return redirect(reverse('products'))
+
+def delete(request, id):
+    product = Products.objects.get(id=id)
+    product.ongoing = False
+    product.save()
+    return redirect(reverse('products'))
+
+def edit(request, id):
+    edit_product = Products.objects.edit_product(id=id, form_data=request.POST)
     return redirect(reverse('products'))
