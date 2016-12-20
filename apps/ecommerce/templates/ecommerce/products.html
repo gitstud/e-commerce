@@ -12,6 +12,13 @@
         border-bottom: 1px solid red !important;
         box-shadow: 0 1px 0 0 red !important;
       }
+      .input-field textarea:focus{
+        border-bottom: 1px solid red !important;
+        box-shadow: 0 1px 0 0 red !important;
+      }
+      .input-field textarea:focus + label{
+        color: red !important;
+      }
       #overlay {
         visibility: hidden;
         position: absolute;
@@ -119,7 +126,14 @@
             <td>{{product.product}}</td>
             <td>{{product.inventory}}</td>
             <td></td>
-            <td></td>
+            <td><a href="#">Edit</a> | <a class="modal-trigger btn red" href="#delete">Delete</a>
+              <div id="delete" class="modal delete-product">
+                <div class="modal-content">
+                  <p>Are you sure you want to delete this product?</p>
+                  <a href="{% url 'destroy' id=product.id%}">Delete</a>
+                </div>
+              </div>
+            </td>
           </tr>
           {% endfor %}
         </table>
@@ -132,7 +146,7 @@
     $(document).ready(function() {
       $('select').material_select();
       $('a.modal-trigger').click(function(){
-        $('#modal1').modal()
+        $(this).siblings().modal()
       })
     });
     </script>

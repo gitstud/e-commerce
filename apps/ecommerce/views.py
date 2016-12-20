@@ -29,3 +29,8 @@ def test(request):
 def add_product(request):
     product = Products.objects.add_product(form_data=request.POST)
     return redirect(reverse('products'))
+
+def destroy(request, id):
+    product = Products.objects.get(id=id)
+    product.delete()
+    return redirect(reverse('products'))
