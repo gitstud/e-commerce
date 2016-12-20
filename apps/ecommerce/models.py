@@ -79,6 +79,14 @@ class ProductManager(models.Manager):
 		new_product = Products.objects.create(product=form_data['name'], description=form_data['description'], inventory=1, ongoing=True, category=category)
 		return new_product
 
+	def edit_product(self, id, form_data):
+		product = Products.objects.get(id=id)
+		product.product = form_data['name']
+		product.description = form_data['description']
+		product.category = form_data['category']
+		product.save()
+		return product
+
 class Products(models.Model):
 	product = models.CharField(max_length=30)
 	description = models.CharField(max_length=255)
