@@ -67,35 +67,33 @@
           <div id="modal1" class="modal add-product">
             <div class="modal-content">
               <h4>Add Product</h4>
-              <div class="input-field">
-                <input type="text" name="name" value="">
-                <label for="name">Name:</label>
-              </div>
-              <div class="input-field">
-                <textarea name="description" class="materialize-textarea"></textarea>
-                <label for="description">Description</label>
-              </div>
-              <div class="input-field">
-                <select class="" name="category">
-                  <option value="">t-shirt</option>
-                </select>
-                <label>Category</label>
-              </div>
-              <div class="input-field">
-                <input type="text" name="new-category" value="">
-                <label for="new-category">or add a new category</label>
-              </div>
-              <div class="input-field">
-                <input type="submit" name="upload" value="Upload">
-              </div>
-              <div class="input-field">
-                <input type="submit" name="" value="Cancel">
-                <input type="submit" name="" value="Preview">
-                <input type="submit" name="" value="Update">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+              <form class="" action="{% url 'add_product' %}" method="post">
+                {% csrf_token %}
+                <div class="input-field">
+                  <input type="text" name="name" value="">
+                  <label for="name">Name:</label>
+                </div>
+                <div class="input-field">
+                  <textarea name="description" class="materialize-textarea"></textarea>
+                  <label for="description">Description</label>
+                </div>
+                <div class="input-field">
+                  <select class="" name="category">
+                    <option value="">t-shirt</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" name="new_category" value="">
+                  <label for="new-category">or add a new category</label>
+                </div>
+                <div class="input-field">
+                  <input type="submit" name="upload" value="Upload">
+                </div>
+                <div class="input-field">
+                  <input type="submit" name="" value="Add Product">
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -114,14 +112,16 @@
               <th>Action</th>
             </tr>
           </thead>
+          {% for product in products %}
           <tr>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{product.id}}</td>
+            <td>{{product.product}}</td>
+            <td>{{product.inventory}}</td>
             <td></td>
             <td></td>
           </tr>
+          {% endfor %}
         </table>
       </div>
     </div>
