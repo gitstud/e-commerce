@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load staticfiles %}
+    <link type="text/css" rel='stylesheet' href="{% static 'ecommerce/css/materialize.css'%}">
+    <style type="text/css">
+    div.box{
+      height: 100%;
+      width: 300px;
+      border: 1px solid black;
+      padding: 7px;
+      margin-top: 10px;
+    }
+    div.products{
+      width: 1000px;
+      height: 100%;
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    div.image{
+      height: 150px;
+      width: 150px;
+      border: 1px solid black;
+    }
+    div.product-display{
+      margin-bottom: 50px;
+    }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper blue-grey lighten-3">
+        <a href="#" class="brand-logo">&nbsp;&nbsp;Dojo eCommerce</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="">Shopping Cart (#)</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col s3">
+        <div class="box">
+          <input type="text" name="" value="" placeholder="product name">
+          <ul class='collection with-header'>
+            <li class='collection-header'>Categories</li>
+            <li class="collection-item">Tshirts</li>
+            <li class="collection-item">Shoes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col s9">
+        <div class="products">
+          <div class="valign-wrapper">
+            <div class="col s3">
+              <h5>Tshirts(page 2)</h5>
+            </div>
+            <div class="col s9">
+              <div class="right">
+                <a href="#">first</a> | <a href="#">prev</a> | 2 | <a href="#">next</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s2 offset-s10">
+              <label for="sorts">Sorted by:</label>
+              <select class="" id="sorts">
+                <option value="">option1</option>
+                <option value="">option2</option>
+              </select>
+            </div>
+          </div>
+          <div class="row product-display">
+            <div class="col s2 offset-s1">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+          </div>
+          <div class="row product-display">
+            <div class="col s2 offset-s1">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+          </div>
+          <div class="row product-display">
+            <div class="col s2 offset-s1">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+            <div class="col s2">
+              <div class="image">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s10 offset-s2">
+              1 | 2 | 3 | ->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'ecommerce/js/materialize.js'%}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+    </script>
+  </body>
+</html>
