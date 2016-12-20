@@ -20,7 +20,7 @@ class UserManager(models.Manager):
 		elif len(form['last_name']) < 3:
 			errors.append("Last Name must be atleast 3 characters")
 		elif not form['last_name'].isalpha():
-			errors.append("Last Name must only consist of letters")	
+			errors.append("Last Name must only consist of letters")
 
 		if len(form['email']) == 0:
 			errors.append("Email is required")
@@ -38,7 +38,7 @@ class UserManager(models.Manager):
 			errors.append("Password confirmation does not match")
 
 		return errors
-	
+
 	def register(self, form):
 		hashed_pass = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt())
 		return self.create(first_name=form['first_name'], last_name=form['last_name'], email=form['email'], password=hashed_pass)
@@ -50,7 +50,7 @@ class UserManager(models.Manager):
 			if bcrypt.hashpw(form['password'].encode(), user.password.encode()) == user.password:
 				return user
 		return None
-		
+
 class Users(models.Model):
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
@@ -60,8 +60,24 @@ class Users(models.Model):
 	updated_at = models.DateTimeField(auto_now=True)
 	objects = UserManager()
 
+class CategoryManager(models.Manager):
+	def retrieve_category(self, category_name):
+		try:
+			category = Categories.objects.get(category=category_name)
+			return category
+		except:
+			new_category = Categories.objects.create(category=category_name)
+			return new_category
+
 class Categories(models.Model):
 	category = models.CharField(max_length=30)
+	objects = CategoryManager()
+
+class ProductManager(models.Manager):
+	def add_product(self, form_data):
+		category = Categories.objects.retrieve_category(category_name=form_data['new_category'])
+		new_product = Products.objects.create(product=form_data['name'], description=form_data['description'], inventory=1, ongoing=True, category=category)
+		return new_product
 
 class Products(models.Model):
 	product = models.CharField(max_length=30)
@@ -69,6 +85,7 @@ class Products(models.Model):
 	inventory = models.PositiveSmallIntegerField(default=0)
 	ongoing = models.CharField(max_length=5)
 	category = models.ForeignKey('Categories', models.DO_NOTHING, related_name="productofcategory")
+	objects = ProductManager()
 
 class Images(models.Model):
 	image = models.CharField(max_length=255)
@@ -99,7 +116,3 @@ class ShippingAddress(models.Model):
 	state = models.CharField(max_length=30)
 	zipcode = models.CharField(max_length=30)
 	order = models.ForeignKey('Orders', models.DO_NOTHING, related_name="shipoforder")
-	
-
-
-
