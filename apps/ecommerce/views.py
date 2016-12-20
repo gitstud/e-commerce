@@ -18,3 +18,6 @@ def products(request):
 
 def show(request):
     return render(request, 'ecommerce/show.html')
+
+def test(request):
+    return render(request, 'ecommerce/test.html')
