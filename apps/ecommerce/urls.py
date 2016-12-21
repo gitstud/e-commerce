@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^category/(?P<category>\d+)/(?P<categorypage>\d+)$', views.browse, name='browse'),
     url(r'^product$', views.product, name='product'),
     url(r'^admin$', views.admin, name="admin"),
     url(r'^orders$', views.orders, name="orders"),
