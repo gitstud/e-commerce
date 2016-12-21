@@ -60,9 +60,8 @@
 		   		</div>
 
 		        <!-- start of loop  -->
-		        	{% for product in products %}
-		        	<p>{{product.name}}hi</p>
-		        	{% endfor %}
+		        	{% for product, item in goods.iteritems %}
+
 		        <div class="divider"></div>
 		 		<div class="section">
 		   			<div class="row">
@@ -70,11 +69,11 @@
 			    			<img class="responsive-img" src="{% static 'cart/images/afroCat.jpeg' %}">
 			    		</div>
 			    		<div class="col s3">
-			    			<h5>Product Name</h5>
-			    			<p>product description</p>
+			    			<h5>{{item.name}}</h5>
+			    			<p>{{item.description}}</p>
 			    		</div>
 			    		<div class="col s2">
-			    			<p>$ product.price</p>
+			    			<p>${{item.price}}</p>
 			    		</div>
 			    		<div class="col s2">
 
@@ -90,14 +89,14 @@
 			    					</select>
 			    				</div>
 			    			</form>
-			    		
+
 			    		</div>
 			    		<div class="col s2">
-			    			<p>$total after adjustments</p>
+			    			<p>${{item.total}}</p>
 			    		</div>
 			   		</div>
 		  		</div>
-
+          	{% endfor %}
 		  		<!-- end of loop -->
 		  		 <div class="row">
 		  		 	<div class="col s10"></div>
