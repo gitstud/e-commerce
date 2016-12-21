@@ -39,3 +39,9 @@ def delete(request, id):
 def edit(request, id):
     edit_product = Products.objects.edit_product(id=id, form_data=request.POST)
     return redirect(reverse('products'))
+
+def cart(request):
+    return render(request, 'ecommerce/cart.html')
+
+def ship(request):
+    return render(request, 'ecommerce/ship.html')
