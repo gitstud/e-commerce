@@ -7,7 +7,7 @@ def index(request):
         items = Products.objects.all()
         for item in items:
             pk = str(item.id)
-            quantity = {'quantity':2}
+            quantity = {'quantity':1}
             request.session['cart'][pk]=quantity
 
     print request.session['cart']
@@ -51,21 +51,40 @@ def edit(request, id):
 
 def cart(request):
     goods = {}
+    grandtotal=0
+    print request.session['cart']
+    print 'ANYTEXT'
     for value, item in request.session['cart'].iteritems():
+        print 'ANYTEXT'
+        print item['quantity']
         good = Products.objects.get(pk=int(value))
-        total = 25.00*item['quantity']
+        total = 25.00* float(item['quantity'])
+        grandtotal += total
         my_list = {
                     'name':good.product,
                     'description':good.description,
                     'price':25.00,
                     'quantity':item['quantity'],
-                    'total':total
+                    'total':total,
+                    'id':good.id
                     }
         pk = str(good.id)
         goods[pk]=my_list
         print goods
         print ('*'*90)
-    return render(request, 'ecommerce/cart.html', {'goods':goods})
+    return render(request, 'ecommerce/cart.html', {'goods':goods, 'grandtotal':grandtotal})
+
+def more(request, id):
+    for value, item in request.session['cart'].iteritems():
+        print value
+        print item
+        if int(id) == int(value):
+            item['quantity'] = request.POST['select']
+
+    print request.session['cart']
+    print ('^'*90)
+    return redirect('cart')
+
 
 def ship(request):
     return render(request, 'ecommerce/ship.html')

@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^delete/(?P<id>\d+)$', views.delete, name='delete'),
     url(r'^edit/(?P<id>\d+)$', views.edit, name='edit'),
     url(r'^cart$', views.cart, name='cart'),
+    url(r'^more/(?P<id>\d+)$', views.more, name='more'),
     url(r'^ship$', views.ship, name='ship'),
 
 ]
